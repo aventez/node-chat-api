@@ -1,9 +1,7 @@
-import { User } from "../interfaces/user.interface"
+import { User } from "../interfaces/user.interface";
 
-export const USER_MOCKS: User[] = [
-    {
-        id: '5f2bbf7135a29f8f0c8be010',
-        username: 'admin',
-        password: '$2b$12$96JxrBPUbwTpTHKHSSWNu.1g0ia5NKPiyW64rV1KYo.SpI77OG596',
-    },
-]
+export const USER_MOCKS: User[] = ([
+    { username: 'admin', password: '$2b$12$OT4CUgxC7UVuV1TYEap8KuF2FwLS3ei9J/fhOS4KqDkdvaPkalm5.' },
+    { username: 'test', password: '$2b$12$OT4CUgxC7UVuV1TYEap8KuF2FwLS3ei9J/fhOS4KqDkdvaPkalm5.' },
+    { username: 'qwerty', password: '$2b$12$OT4CUgxC7UVuV1TYEap8KuF2FwLS3ei9J/fhOS4KqDkdvaPkalm5.' },
+] as any) as User[];
