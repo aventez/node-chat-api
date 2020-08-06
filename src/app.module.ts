@@ -7,10 +7,11 @@ import { ChatModule } from './api/chat/chat.module';
 
 import appConfig from './config/app.config';
 import databaseConfig from './config/db.config';
+import authConfig from './config/auth.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [appConfig, databaseConfig] }),
+    ConfigModule.forRoot({ isGlobal: true, load: [appConfig, databaseConfig, authConfig] }),
     DatabaseModule,
     AuthModule,
     UsersModule,
