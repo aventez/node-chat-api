@@ -8,19 +8,17 @@ async function bootstrap() {
 
   const configService: ConfigService = app.get<ConfigService>(ConfigService);
   const port: number = configService.get<number>('port');
+  const version: string = configService.get<string>('version');
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('Chatroom')
     .setDescription('REST API for chatroom')
-    .setVersion('BETA')
+    .setVersion(version)
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup('/', app, document);
-
-  // Add a route prefix
-  app.setGlobalPrefix('api');
-  app.enableCors();
 
   await app.listen(port);
 }
