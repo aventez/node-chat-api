@@ -4,6 +4,8 @@ import { EncryptService } from 'src/services/encrypt/encrypt.service';
 import { AuthUserDto } from './dto/auth.user.dto';
 import { UsersService } from '../user/user.service';
 import { AuthRegisterDto } from './dto/auth.register.dto';
+import { User } from '../user/interfaces/user.interface';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +13,7 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         private encryptService: EncryptService,
+        private configService: ConfigService,
     ) {}
 
     async validateUser(username: string, password: string): Promise<AuthUserDto | null> {
@@ -24,6 +27,16 @@ export class AuthService {
         }
 
         return null;
+    }
+
+    async verify(token: string): Promise<User | null> {
+        try {
+            const payload = this.jwtService.verify(token, this.configService.get('auth.jwtSecret'));
+            const user = await this.usersService.findOneByUsername(payload.username);
+
+            if (!user) throw new UnauthorizedException('Token is incorrect.');
+            return user;
+        } catch(err) {}
     }
 
     async login(user: AuthUserDto) {

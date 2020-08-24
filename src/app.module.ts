@@ -9,6 +9,7 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/db.config';
 import authConfig from './config/auth.config';
 import { EncryptModule } from './services/encrypt/encrypt.module';
+import { RoomModule } from './api/room/room.module';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { EncryptModule } from './services/encrypt/encrypt.module';
     EncryptModule,
     AuthModule,
     UsersModule,
+    RoomModule,
+    ChatModule,
   ],
 })
 export class AppModule {}
